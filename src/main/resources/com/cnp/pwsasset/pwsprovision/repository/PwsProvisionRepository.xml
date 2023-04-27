@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cnp.pwsasset.pwsprovision.repository.PwsProvisionRepository">
+
+    <select id="findAll" resultType="com.cnp.pwsasset.pwsprovision.entity.PwsProvision">
+        select * from pwsprovision
+    </select>
+
+    <select id="queryColumnComment" resultType="HashMap">
+        select column_name, column_comment from information_schema.columns where table_name='pwsprovision'
+    </select>
+
+    <insert id="insertData" parameterType="java.util.List">
+        insert into pwsprovision (id, department, centercd, realname, center, headquarters, sysadmin, idsysadmin, assetno, idasset, sn, manager, idmanager, areainstall, locinstall, model, period, reason, joiningdate, applicationdate, provisiondate, note)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.department}, #{item.centercd}, #{item.realname}, #{item.center}, #{item.headquarters}, #{item.sysadmin}, #{item.idsysadmin}, #{item.assetno}, #{item.idasset}, #{item.sn}, #{item.manager}, #{item.idmanager}, #{item.areainstall}, #{item.locinstall}, #{item.model}, #{item.period}, #{item.reason}, #{item.joiningdate}, #{item.applicationdate}, #{item.provisiondate}, #{item.note})
+        </foreach>
+        on duplicate key update department=values(department), centercd=values(centercd), realname=values(realname), center=values(center), headquarters=values(headquarters), sysadmin=values(sysadmin), idsysadmin=values(idsysadmin), assetno=values(assetno), idasset=values(idasset), sn=values(sn), manager=values(manager), idmanager=values(idmanager), areainstall=values(areainstall), locinstall=values(locinstall), model=values(model), period=values(period), reason=values(reason), joiningdate=values(joiningdate), applicationdate=values(applicationdate), provisiondate=values(provisiondate), note=values(note)
+    </insert>
+</mapper>
