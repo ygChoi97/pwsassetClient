@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class Pws {
+    private int id;                 // id (pk)
     private String uptake;          // 사용구분
     private String company;         // 회사
     private String headquarters;    // 본부

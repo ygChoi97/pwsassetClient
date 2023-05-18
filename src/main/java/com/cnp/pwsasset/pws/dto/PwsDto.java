@@ -8,7 +8,8 @@ import java.util.Date;
 @Setter @Getter @ToString
 @NoArgsConstructor @AllArgsConstructor
 public class PwsDto {
-    private String uptake;           // 사용구분
+    private int id;                 // id (pk)
+    private String uptake;          // 사용구분
     private String company;         // 회사
     private String headquarters;    // 본부
     private String center;          // 센터
@@ -35,6 +36,7 @@ public class PwsDto {
 
 
     public PwsDto(Pws pws) {
+        id = pws.getId();
         uptake = pws.getUptake();
         company = pws.getCompany();
         headquarters = pws.getHeadquarters();
@@ -42,7 +44,7 @@ public class PwsDto {
         department = pws.getDepartment();
         username = pws.getUsername();
         userid = pws.getUserid();
-        centercd = pws.getCenter();
+        centercd = pws.getCentercd();
         model = pws.getModel();
         assetno = pws.getAssetno();
         idasset = pws.getIdasset();

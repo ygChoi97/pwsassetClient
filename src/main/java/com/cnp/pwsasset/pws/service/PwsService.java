@@ -21,14 +21,20 @@ public class PwsService {
 
         return new FindAllPwsDto(repository.findAll());
     }
-    public PwsDto findOneService(String managementId) {
+    public PwsDto findOneServiceFromIdasset(String managementId) {
 
-        Pws pws = repository.findOne(managementId);
-        log.info("findOneService returns data - {}", pws);
+        Pws pws = repository.findOneFromIdasset(managementId);
+        log.info("findOneFromIdasset returns data - {}", pws);
 
         return pws!=null ? new PwsDto(pws) : null;
     }
 
+    public PwsDto findOneFromSNService(String sn) {
+        Pws pws = repository.findOneFromSN(sn);
+        log.info("findOneFromSNService returns data - {}", pws);
+
+        return pws!=null ? new PwsDto(pws) : null;
+    }
     //    public List<ResponseDTO> queryColumnCommentService() {
     public List<ItemNameOfAssetDTO> queryColumnCommentService() {
 
@@ -55,16 +61,29 @@ public class PwsService {
 
     }
 
-    public FindAllPwsDto updateService(final Pws pws) {
+    public FindAllPwsDto updateServiceWhereIdasset(final Pws pws) {
         if (pws == null) {
             log.warn("pws cannot be null!");
             throw new RuntimeException("pws cannot be null!");
         }
 
-        boolean flag = repository.modify(pws);
+        boolean flag = repository.modifyWhereIdasset(pws);
+        if(flag == false)
+            log.warn("자산이 업데이트되지 않았습니다.");
+        return flag ? findAllService() : null;
 
-        return flag ? findAllService() : new FindAllPwsDto();
+    }
 
+    public FindAllPwsDto updateServiceWhereSN(Pws pws) {
+        if (pws == null) {
+            log.warn("pws cannot be null!");
+            throw new RuntimeException("pws cannot be null!");
+        }
+
+        boolean flag = repository.modifyWhereSN(pws);
+        if(flag == false)
+            log.warn("자산이 업데이트되지 않았습니다.");
+        return flag ? findAllService() : null;
     }
 
     public FindAllPwsDto importFromExcelService(List<Pws> list) {
@@ -83,5 +102,17 @@ public class PwsService {
 
     public FindAllPwsDto findDisposalAllService(String search) {
         return new FindAllPwsDto(repository.findDisposalAll(search));
+    }
+
+    public FindAllPwsDto updateServiceWhereID(Pws pws) {
+        if (pws == null) {
+            log.warn("pws cannot be null!");
+            throw new RuntimeException("pws cannot be null!");
+        }
+
+        boolean flag = repository.modifyWhereID(pws);
+        if(flag == false)
+            log.warn("자산이 업데이트되지 않았습니다.");
+        return flag ? findAllService() : null;
     }
 }

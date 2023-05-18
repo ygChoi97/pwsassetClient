@@ -14,8 +14,15 @@ public interface PwsRepository {
      * @param managementId
      * @return
      */
-    Pws findOne(String managementId);
+    Pws findOneFromIdasset(String managementId);
 
+    /**
+     *
+     * @param sn
+     * @return
+     */
+
+    Pws findOneFromSN(String sn);
     /**
      * 자산 세부항목명 조회 SQL
      * @return
@@ -40,14 +47,26 @@ public interface PwsRepository {
      * @param pws
      * @return
      */
-    boolean modify(Pws pws);
+    boolean modifyWhereIdasset(Pws pws);
+
+    /**
+     *
+     * @param pws
+     * @return
+     */
+    boolean modifyWhereSN(Pws pws);
+
+    boolean modifyWhereID(Pws pws);
 
     /**
      *  자산 목록 등록 SQL
      * @param list
      * @return
      */
+
     boolean insertData(List<Pws> list);
 
     List<Pws> findDisposalAll(String search);
+
+
 }

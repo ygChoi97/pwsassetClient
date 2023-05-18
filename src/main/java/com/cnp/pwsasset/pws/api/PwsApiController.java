@@ -53,12 +53,29 @@ public class PwsApiController {
      * @param managementId
      * @return
      */
-    @GetMapping("/{managementId}")
-    public ResponseEntity<?> findPws(@PathVariable String managementId) {
-        log.info("/api/pws/{} GET request!", managementId);
+    @GetMapping("/idasset/{managementId}")
+    public ResponseEntity<?> findPwsFromIdasset(@PathVariable String managementId) {
+        log.info("/api/pws/idasset/{} GET request!", managementId);
         if(managementId == null) return ResponseEntity.badRequest().build();
 
-        PwsDto dto = service.findOneService(managementId);
+        PwsDto dto = service.findOneServiceFromIdasset(managementId);
+
+        if(dto == null) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+    /**
+     * 자산 개별 조회 API
+     * @param sn
+     * @return
+     */
+    @GetMapping("/sn/{sn}")
+    public ResponseEntity<?> findPwsFromSN(@PathVariable String sn) {
+        log.info("/api/pws/sn/{} GET request!", sn);
+        if(sn == null) return ResponseEntity.badRequest().build();
+
+        PwsDto dto = service.findOneFromSNService(sn);
 
         if(dto == null) return ResponseEntity.notFound().build();
 
@@ -115,12 +132,36 @@ public class PwsApiController {
      * @param pws
      * @return
      */
-    @PutMapping
-    public ResponseEntity<?> update(@RequestBody Pws pws) {
-        log.info("api/pws{} PUT request!", pws);
+    @PutMapping("/idasset")
+    public ResponseEntity<?> updateWhereIdasset(@RequestBody Pws pws) {
+        log.info("api/pws/idasset PUT request!\n{}", pws);
 
         try {
-            FindAllPwsDto dtos = service.updateService(pws);
+            FindAllPwsDto dtos = service.updateServiceWhereIdasset(pws);
+            return ResponseEntity.ok().body(dtos);
+        }catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PutMapping("/sn")
+    public ResponseEntity<?> updateWhereSN(@RequestBody Pws pws) {
+        log.info("api/pws/sn PUT request!\n{}", pws);
+
+        try {
+            FindAllPwsDto dtos = service.updateServiceWhereSN(pws);
+            return ResponseEntity.ok().body(dtos);
+        }catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateWhereID(@RequestBody Pws pws) {
+        log.info("api/pws PUT request!\n{}", pws);
+
+        try {
+            FindAllPwsDto dtos = service.updateServiceWhereID(pws);
             return ResponseEntity.ok().body(dtos);
         }catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
