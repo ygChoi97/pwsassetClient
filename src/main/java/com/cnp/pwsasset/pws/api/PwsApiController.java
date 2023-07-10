@@ -100,7 +100,7 @@ public class PwsApiController {
             return ResponseEntity.ok().body(dtos);
 
         } catch(RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(e);
         }
     }
 
@@ -122,7 +122,7 @@ public class PwsApiController {
             return ResponseEntity.ok().body(dtos);
 
         } catch(RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(e);
         }
     }
 
@@ -132,15 +132,15 @@ public class PwsApiController {
      * @param pws
      * @return
      */
-    @PutMapping("/idasset")
+    @PutMapping
     public ResponseEntity<?> updateWhereIdasset(@RequestBody Pws pws) {
-        log.info("api/pws/idasset PUT request!\n{}", pws);
+        log.info("api/pws PUT request!\n{}", pws);
 
         try {
             FindAllPwsDto dtos = service.updateServiceWhereIdasset(pws);
             return ResponseEntity.ok().body(dtos);
         }catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e);
         }
     }
 
@@ -152,19 +152,7 @@ public class PwsApiController {
             FindAllPwsDto dtos = service.updateServiceWhereSN(pws);
             return ResponseEntity.ok().body(dtos);
         }catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @PutMapping
-    public ResponseEntity<?> updateWhereID(@RequestBody Pws pws) {
-        log.info("api/pws PUT request!\n{}", pws);
-
-        try {
-            FindAllPwsDto dtos = service.updateServiceWhereID(pws);
-            return ResponseEntity.ok().body(dtos);
-        }catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e);
         }
     }
 

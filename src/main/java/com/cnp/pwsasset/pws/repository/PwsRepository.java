@@ -56,8 +56,6 @@ public interface PwsRepository {
      */
     boolean modifyWhereSN(Pws pws);
 
-    boolean modifyWhereID(Pws pws);
-
     /**
      *  자산 목록 등록 SQL
      * @param list

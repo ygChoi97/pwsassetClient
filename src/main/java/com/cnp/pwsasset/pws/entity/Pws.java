@@ -11,7 +11,6 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class Pws {
-    private int id;                 // id (pk)
     private String uptake;          // 사용구분
     private String company;         // 회사
     private String headquarters;    // 본부
@@ -22,7 +21,7 @@ public class Pws {
     private String centercd;        // 코스트센터CD
     private String model;           // 모델명
     private String assetno;         // 자산번호
-    private String idasset;         // 자산관리번호
+    private String idasset;         // 자산관리번호 (pk)
     private String sn;              // S/N
     private String graphic;         // 그래픽카드
     private String memory;          // 메모리

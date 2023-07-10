@@ -13,21 +13,21 @@
     </insert>
 
     <select id="findAll" resultType="com.cnp.pwsasset.pws.entity.Pws">
-        select id, uptake, company, headquarters, center, department, username, userid, centercd, model, assetno, idasset, sn, graphic, memory, monitor, area, building, storey, location, objpurchase, objuse, desctask, introductiondate, note
+        select *
         from pwsinfo
     </select>
 
     <select id="findDisposalAll" resultType="com.cnp.pwsasset.pws.entity.Pws">
-        select uptake, company, headquarters, center, department, username, userid, centercd, model, assetno, idasset, sn, graphic, memory, monitor, area, building, storey, location, objpurchase, objuse, desctask, introductiondate, note
+        select *
         from pwsinfo where uptake like CONCAT('%',#{search}, '%')
     </select>
 
     <select id="findOneFromIdasset" resultType="com.cnp.pwsasset.pws.entity.Pws">
-        select id, uptake, company, headquarters, center, department, username, userid, centercd, model, assetno, idasset, sn, graphic, memory, monitor, area, building, storey, location, objpurchase, objuse, desctask, introductiondate, note from pwsinfo where idasset=#{managementId}
+        select * from pwsinfo where idasset=#{managementId}
     </select>
 
     <select id="findOneFromSN" resultType="com.cnp.pwsasset.pws.entity.Pws">
-        select id, uptake, company, headquarters, center, department, username, userid, centercd, model, assetno, idasset, sn, graphic, memory, monitor, area, building, storey, location, objpurchase, objuse, desctask, introductiondate, note from pwsinfo where sn=#{sn}
+        select * from pwsinfo where sn=#{sn}
     </select>
 
     <select id="queryColumnComment" resultType="HashMap">
@@ -44,12 +44,6 @@
         update pwsinfo
         set uptake=#{uptake}, company=#{company}, headquarters=#{headquarters}, center=#{center}, department=#{department}, username=#{username}, userid=#{userid}, centercd=#{centercd}, model=#{model}, assetno=#{assetno}, idasset=#{idasset}, graphic=#{graphic}, memory=#{memory}, monitor=#{monitor}, area=#{area}, building=#{building}, storey=#{storey}, location=#{location}, objpurchase=#{objpurchase}, objuse=#{objuse}, desctask=#{desctask}, introductiondate=#{introductiondate}, note=#{note}
         where sn=#{sn}
-    </update>
-
-    <update id="modifyWhereID">
-        update pwsinfo
-        set uptake=#{uptake}, company=#{company}, headquarters=#{headquarters}, center=#{center}, department=#{department}, username=#{username}, userid=#{userid}, centercd=#{centercd}, model=#{model}, assetno=#{assetno}, idasset=#{idasset}, sn=#{sn}, graphic=#{graphic}, memory=#{memory}, monitor=#{monitor}, area=#{area}, building=#{building}, storey=#{storey}, location=#{location}, objpurchase=#{objpurchase}, objuse=#{objuse}, desctask=#{desctask}, introductiondate=#{introductiondate}, note=#{note}
-        where id=#{id}
     </update>
 
     <insert id="insertData" parameterType="java.util.List">

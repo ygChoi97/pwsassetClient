@@ -103,16 +103,4 @@ public class PwsService {
     public FindAllPwsDto findDisposalAllService(String search) {
         return new FindAllPwsDto(repository.findDisposalAll(search));
     }
-
-    public FindAllPwsDto updateServiceWhereID(Pws pws) {
-        if (pws == null) {
-            log.warn("pws cannot be null!");
-            throw new RuntimeException("pws cannot be null!");
-        }
-
-        boolean flag = repository.modifyWhereID(pws);
-        if(flag == false)
-            log.warn("자산이 업데이트되지 않았습니다.");
-        return flag ? findAllService() : null;
-    }
 }
