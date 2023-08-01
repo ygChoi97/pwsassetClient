@@ -10,6 +10,7 @@ import java.util.Date;
 public class PwsDto {
     private String uptake;          // 사용구분
     private String company;         // 회사
+    private String classification;  // 자산구분
     private String headquarters;    // 본부
     private String center;          // 센터
     private String department;      // 관리부서
@@ -37,6 +38,7 @@ public class PwsDto {
     public PwsDto(Pws pws) {
         uptake = pws.getUptake();
         company = pws.getCompany();
+        classification = pws.getClassification();
         headquarters = pws.getHeadquarters();
         center = pws.getCenter();
         department = pws.getDepartment();
